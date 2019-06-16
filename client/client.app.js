@@ -1,4 +1,5 @@
-const USER_LOCAL_STORAGE = '89h32inde&^#$I@GUBDEJFIW'
+const USER_TOKEN_LOCAL_STORAGE = '89h32inde&^#$I@GUBDEJFIW'
+const USER_EMAIL_LOCAL_STORAGE = 'HB#*&@T$E#UDBBF&*GYDKSB('
 window.todoAppState = {
     todos: [],
 }
@@ -12,11 +13,15 @@ function render(components) {
 }
 
 $(document).ready(function () {
-    let user = window.localStorage.getItem(USER_LOCAL_STORAGE) || null
-    if (user) {
-
+    let email = window.localStorage.getItem(USER_EMAIL_LOCAL_STORAGE) || null
+    let token = window.localStorage.getItem(USER_TOKEN_LOCAL_STORAGE) || null
+    render([component_loading()])
+    if (getQueryParam('code')) {
+        /** login degan github */
+    } else if (email && token) {
+        
     } else {
-        let components = [component_loading()]
+        let components = [component_login()]
         render(components)
     }
     console.log("ready!");

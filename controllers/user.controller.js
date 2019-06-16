@@ -9,7 +9,7 @@ class Controller {
         try {
             let user = await User.findOne({email}).exec()
             if (user && match(password, user.password)) {
-                let token = jwt.sign({user: user._id, email})
+                let token = jwt.sign({user: user._id})
                 res.json({access_token: token})
             } else {
                 next(errMsg)
@@ -33,6 +33,58 @@ class Controller {
             } else {
                 next({code: 400, msg: err.message})
             }
+        }
+    }
+
+    static async loginGithub(req, res, next) {
+        let { code } = req.body
+        try {
+            /**
+             * ambil access token dari github 
+             */
+            let githubToken = await axios.post('https://github.com/login/oauth/access_token', {
+                client_id: process.env.GITHUB_OAUTH_CLIENT_ID,
+                client_secret: process.env.GITHUB_OAUTH_SECRET,
+                code,
+                redirect_uri: 'http://localhost:8080/'
+            }, {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+            let { access_token } = githubToken.data
+
+            /**
+             * ambiil data username dari github
+             */
+            let userEmails = await axios.get(`https://api.github.com/user/emails`, {
+                headers: {
+                    'Authorization': `token ${access_token}`
+                }
+            })
+            let responseEmails = userEmails.data
+            let email = responseEmails[0] && responseEmails[0].email || null
+            if (!email) {
+                next({code: 400, msg: `this github user doesn't have email address`})
+            }
+
+            /**
+             * kalau udah ada ga usah bikin user
+             * kalau belum bikin, bikin
+             */
+            let user = await User.findOne({ email }).exec()
+            if (user) {
+                let token = jwt.sign({ user: user._id })
+                res.json({ access_token: token })
+            } else {
+                await User.create({ email: login, password: Math.random() })
+                let user = await User.findOne({ email: login })
+                let token = jwt.sign({ user: user._id })
+                res.json({ access_token: token })
+            }
+
+        } catch (err) {
+            next(err)
         }
     }
 }

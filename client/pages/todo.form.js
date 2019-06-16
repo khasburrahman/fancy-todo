@@ -39,6 +39,7 @@ function event_submitTodo() {
     let dueDate = $("#inputDueDate").val()
     let quillData = window.todoAppState.quill.getContents()
     let textData = window.todoAppState.quill.getText()
+    let htmlData = window.todoAppState.quill.root.innerHTML
 
     if (name == ''){
         toast_error('judul harus ada')
@@ -50,7 +51,7 @@ function event_submitTodo() {
         return
     }
 
-    action_postTodo({name, dueDate, quillData, textData})
+    action_postTodo({name, dueDate, quillData, textData, htmlData})
         .then(() => action_listTodo())
         .then(res => {
             let todos = res.data

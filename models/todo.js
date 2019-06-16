@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const ModelSchema = new Schema({
     name: String,
     textData: String,
+    htmlData: String,
     quillData: Schema.Types.Mixed,
     dueDate: {
         type: Date,

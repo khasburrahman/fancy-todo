@@ -7,10 +7,8 @@ const page_todoMain = () => {
             </div>
             <h5 class="h5 mb-3 font-weight-normal">${(todos.length > 0) ? "Your Todo list: " : 'Your Todo is currently empty'}</h5>
 
-            <div class="row">
-                <div class="col-sm-2 p-3"></div>
-                <div class="col-sm-8 p-3"></div>
-                ${window.todoAppState.todos.map(todo => component_todo(todo)).join('')}
+            <div class="row text-left p-5">
+                ${window.todoAppState.todos.map((todo, i) => component_todo(todo, i)).join('')}
             </div> 
         </div>
     `

@@ -3,9 +3,9 @@ const Todo = require('../models/todo')
 class TodoController { 
     static async create(req, res, next) {
         let user = req.user
-        let {textData, quillData, dueDate, name} = req.body
+        let {textData, quillData, dueDate, name, htmlData} = req.body
         try {
-            let todo = await Todo.create({ textData, quillData, dueDate, name, status: false, user })
+            let todo = await Todo.create({ textData, quillData, dueDate, name, status: false, user, htmlData })
             let {_id} = todo
             res.json({_id, textData, quillData, dueDate, name})
         } catch(err) {
@@ -19,8 +19,8 @@ class TodoController {
         try {
             let queryResult = await Todo.find({user}).exec()
             let todos = queryResult.map(val => {
-                let {name, textData, quillData, dueDate, status} = val
-                return { name, textData, quillData, dueDate, status }
+                let {name, textData, quillData, dueDate, status, htmlData} = val
+                return { name, textData, quillData, dueDate, status, htmlData }
             })
             res.json(todos)
         } catch(err) {

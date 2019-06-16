@@ -46,7 +46,7 @@ class Controller {
                 client_id: process.env.GITHUB_OAUTH_CLIENT_ID,
                 client_secret: process.env.GITHUB_OAUTH_SECRET,
                 code,
-                redirect_uri: 'http://localhost:8080/'
+                redirect_uri: 'https://khasburrahman.github.io/fancy-todo/'
             }, {
                     headers: {
                         'Accept': 'application/json'

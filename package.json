@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-dev": "node client.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
   }
 }

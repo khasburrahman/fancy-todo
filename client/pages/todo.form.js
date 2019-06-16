@@ -44,6 +44,7 @@ function event_editTodo(i) {
     let quillData = window.todoAppState.quill.getContents()
     let textData = window.todoAppState.quill.getText()
     let htmlData = window.todoAppState.quill.root.innerHTML
+    let status = todo.status
 
     if (name == '') {
         toast_error('judul harus ada')
@@ -55,7 +56,7 @@ function event_editTodo(i) {
         return
     }
 
-    action_update({ name, dueDate, quillData, textData, htmlData }, id)
+    action_update({ name, dueDate, quillData, textData, htmlData, status }, id)
         .then(() => action_listTodo())
         .then(res => {
             let todos = res.data

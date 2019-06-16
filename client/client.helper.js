@@ -6,7 +6,12 @@ function getQueryParam(key) {
 }
 
 function toast_error(err) {
-    let msg = err.response && err.response.data || 'unknown error: ' + err.message
+    let msg
+    if (typeof(err) === 'string') {
+        msg = err
+    } else {
+        msg = err.response && err.response.data || 'unknown error: ' + err.message
+    }
     $.toast({
         title: 'An error occured!',
         content: msg,

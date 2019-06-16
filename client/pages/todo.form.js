@@ -5,6 +5,9 @@ const page_todoForm = (i) => {
     let title = (edit && edit != null) ? 'Edit Todo' : 'Create Todo'
 
     return `
+        <div class="text-left pl-5 pt-4">
+            <button onClick="render('main')" class="btn btn-md btn-warning">Back</button>
+        </div>
         <form class="form-todo mt-5 pl-5 pr-5">
             <h2 class="h2 mb-5 font-weight-normal">${title}</h2>
             
@@ -47,8 +50,6 @@ function event_submitTodo() {
         return
     }
 
-    debugger
-    
     action_postTodo({name, dueDate, quillData, textData})
         .then(() => action_listTodo())
         .then(res => {

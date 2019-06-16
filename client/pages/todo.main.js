@@ -15,7 +15,7 @@ const page_todoMain = () => {
 }
 
 function event_create() {
-    render('create', () => {
+    render('form', () => {
         window.todoAppState.quill = new Quill('#quill-editor', {
             theme: 'snow'
         })

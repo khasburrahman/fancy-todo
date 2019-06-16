@@ -22,7 +22,7 @@ function render(page, callback) {
         case 'main': 
             components = [component_nav(), page_todoMain()]
             break
-        case 'create': 
+        case 'form': 
             components = [component_nav(), page_todoForm()]
             break
         case 'detail': 

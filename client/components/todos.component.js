@@ -38,7 +38,14 @@ const component_todo = (todo, i) => `
 `
 
 function event_update(i) {
-
+    window.todoAppState.editId = i
+    let todo = window.todoAppState.todos[i] || {}
+    render('form', () => {
+        window.todoAppState.quill = new Quill('#quill-editor', {
+            theme: 'snow',
+        })
+        window.todoAppState.quill.setContents(todo.quillData)
+    })
 }
 
 function event_delete(i) {

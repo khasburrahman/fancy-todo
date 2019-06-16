@@ -1,7 +1,8 @@
-const page_todoForm = (i) => {
+const page_todoForm = () => {
     let edit = window.todoAppState.editId
     let todos = window.todoAppState.todos  
-    let { dueDate = null, name = ''} = todos[edit] || {}
+    let { dueDate = formatDate(new Date()), name = ''} = todos[edit] || {}
+    dueDate = formatDate(dueDate)
     let title = (edit && edit != null) ? 'Edit Todo' : 'Create Todo'
 
     return `
@@ -28,9 +29,42 @@ const page_todoForm = (i) => {
             </div>
             <label for="quill-editor" class="sr-only">Quill Editor</label>
             <div id="quill-editor" class="mb-2"></div>
-            <button onclick="event_submitTodo()" class="btn btn-sm btn-primary btn-block" type="submit">Submit Todo</button>
+            <button onclick="${(edit || edit === 0) ? `event_editTodo(${edit})` : 'event_submitTodo()'}" class="btn btn-sm btn-primary btn-block" type="submit">Submit Todo</button>
         </form>
     `
+}
+
+function event_editTodo(i) {
+    event.preventDefault()
+    let todo = window.todoAppState.todos[i] || {}
+    let id = todo._id
+
+    let name = $("#inputTodoName").val()
+    let dueDate = $("#inputDueDate").val()
+    let quillData = window.todoAppState.quill.getContents()
+    let textData = window.todoAppState.quill.getText()
+    let htmlData = window.todoAppState.quill.root.innerHTML
+
+    if (name == '') {
+        toast_error('judul harus ada')
+        return
+    }
+
+    if (dueDate == '') {
+        toast_error('due date harus ada')
+        return
+    }
+
+    action_update({ name, dueDate, quillData, textData, htmlData }, id)
+        .then(() => action_listTodo())
+        .then(res => {
+            let todos = res.data
+            window.todoAppState.todos = todos
+            window.todoAppState.editId = null
+            render('main')
+            toast_success("Sukses edit todo buat kamu!")
+        })
+        .catch(toast_error)
 }
 
 function event_submitTodo() {
@@ -57,6 +91,7 @@ function event_submitTodo() {
             let todos = res.data
             window.todoAppState.todos = todos
             render('main')
+            toast_success("Sukses bikin todo buat kamu!")
         })
         .catch(toast_error)
 }

@@ -79,8 +79,8 @@ class Controller {
             } else {
                 await User.create({ email, password: Math.random() })
                 let user = await User.findOne({ email })
-                let token = jwt.sign({ user: user._id, email })
-                res.json({ access_token: token })
+                let token = jwt.sign({ user: user._id  })
+                res.json({ access_token: token, email })
             }
 
         } catch (err) {

@@ -14,6 +14,7 @@ Route | HTTP | Header | BodyJSON / QueryParam | Response | Description
 -- | -- | -- | -- | -- | --
 `/user/register` | POST | - | {email, password} | {_id, email, password} | register a user
 `/user/login` | POST | - | {email, password} | {access_token} | login: get token
+`/user/loginGithub` | POST | - | {code} | {access_token, email} | login: get token pake github
 `/todo` | POST | token | {textData, quillData, dueDate, name, htmlData} | {textData, quillData, dueDate, name _id} | create a new todo
 `/todo` | GET | token | - | [{ name, textData, quillData, dueDate, status, htmlData, _id }] | get list of todo
 `/todo/:id` | GET | token | - | { name, textData, quillData, dueDate, status } | get single todo

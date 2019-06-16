@@ -1,3 +1,4 @@
+const { hash } = require('../helpers/password.helper')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
   
@@ -7,7 +8,7 @@ const ModelSchema = Schema({
 })
 
 ModelSchema.pre('save', function (next) {
-    this.password = hashPass(this.password)
+    this.password = hash(this.password)
     next()
 });
 

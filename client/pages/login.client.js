@@ -52,10 +52,19 @@ function event_login() {
 
 function event_register() {
     event.preventDefault()
-    
-}
+    let email = $("#inputEmail").val()
+    let password = $("#inputPassword").val()
+    if (email == '' || password == ''){
+        toast_error('username / email can\'t be empty')
+        return
+    }
 
-function event_register() {
-    event.preventDefault()
+    $("#inputEmail").val('')
+    $("#inputPassword").val('')
 
+    action_register(email, password)
+        .then(() => {
+            toast_success(`Berhasil!`, "User berhasil dibuat")
+        })
+        .catch(toast_error)
 }

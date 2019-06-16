@@ -20,7 +20,7 @@ const page_login = () => `
 function event_loginGithub() {
     event.preventDefault()
     window.open(
-        'https://github.com/login/oauth/authorize?client_id=ab4bd6813865c385b036&redirect_uri=http://localhost:8080/&allow_signup=true&scope=user:email read:user',
+        'https://github.com/login/oauth/authorize?client_id=ab4bd6813865c385b036&redirect_uri=https://khasburrahman.github.io/fancy-todo/&allow_signup=true&scope=user:email read:user',
         '_self'
     )
 }

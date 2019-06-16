@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:3000`
+const BASE_URL = `https://hemhem-fancytodo.herokuapp.com/`
 
 function _axiosGetConfig() {
     let token = window.localStorage.getItem(USER_TOKEN_LOCAL_STORAGE) 

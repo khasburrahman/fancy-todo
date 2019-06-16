@@ -28,7 +28,11 @@ class Controller {
             res.json({_id, email, password})
         } catch (err) {
             console.log('register error', err)
-            next({code: 400, msg: err.message})
+            if (err.code === 11000){
+                next({code: 400, msg: "email already exists, "+email})
+            } else {
+                next({code: 400, msg: err.message})
+            }
         }
     }
 }

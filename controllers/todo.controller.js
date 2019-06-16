@@ -2,9 +2,10 @@ const Todo = require('../models/todo')
 
 class TodoController { 
     static async create(req, res, next) {
+        let user = req.user
         let {textData, quillData, dueDate, name} = req.body
         try {
-            let todo = await Todo.create({ textData, quillData, dueDate, name, status: false })
+            let todo = await Todo.create({ textData, quillData, dueDate, name, status: false, user })
             let {_id} = todo
             res.json({_id, textData, quillData, dueDate, name})
         } catch(err) {

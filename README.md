@@ -14,3 +14,8 @@ Route | HTTP | Header | BodyJSON / QueryParam | Response | Description
 -- | -- | -- | -- | -- | --
 `/user/register` | POST | - | {email, password} | {_id, email, password} | register a user
 `/user/login` | POST | - | {email, password} | {access_token} | login: get token
+`/todo` | POST | token | {textData, quillData, dueDate, name, htmlData} | {textData, quillData, dueDate, name _id} | create a new todo
+`/todo` | GET | token | - | [{ name, textData, quillData, dueDate, status, htmlData, _id }] | get list of todo
+`/todo/:id` | GET | token | - | { name, textData, quillData, dueDate, status } | get single todo
+`/todo/:id` | DELETE | token | - | - | delete a todo
+`/todo/:id` | PATCH | token | { textData, quillData, name, dueDate, status, htmlData} | { name, textData, quillData, dueDate, status } | update todo

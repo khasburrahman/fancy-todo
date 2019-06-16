@@ -33,3 +33,7 @@ function action_loginWithGithub(code) {
 function action_listTodo() {
     return axios.get(`${BASE_URL}/todo`, _axiosGetConfig())
 }
+
+function action_postTodo(payload) {
+    return axios.post(`${BASE_URL}/todo`, payload, _axiosGetConfig())
+}

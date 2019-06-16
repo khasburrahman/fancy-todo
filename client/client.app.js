@@ -2,13 +2,15 @@ const USER_TOKEN_LOCAL_STORAGE = '89h32inde&^#$I@GUBDEJFIW'
 const USER_EMAIL_LOCAL_STORAGE = 'HB#*&@T$E#UDBBF&*GYDKSB('
 window.todoAppState = {
     todos: [],
+    editId: null,
+    quill: null
 }
 
 /**
  * string komponen yang akan di render
  * @param {Array} components 
  */
-function render(page) {
+function render(page, callback) {
     let components = []
     switch (page) {
         case 'login': 
@@ -18,14 +20,17 @@ function render(page) {
             components = [page_loading()]
             break
         case 'main': 
-            components = [page_todoMain()]
+            components = [component_nav(), page_todoMain()]
+            break
+        case 'create': 
+            components = [component_nav(), page_todoForm()]
             break
         case 'detail': 
             break
         default:
             break
     }
-    $('#main').html(components.join(''))
+    $('#main').html(components.join('')).promise().done(callback)
 }
 
 $(document).ready(function () {
@@ -43,8 +48,7 @@ $(document).ready(function () {
             })
             .catch(toast_error)
     } else {
-        let components = [page_login()]
-        render('components')
+        render('login')
     }
     console.log("ready!");
 })

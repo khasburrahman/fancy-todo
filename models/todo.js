@@ -11,13 +11,13 @@ const ModelSchema = new Schema({
             validator: function(v) {
                 let today = new Date() 
                 today = today.setHours(0, 0, 0, 0)
-                if (today >= v) {
+                if (v >= today) {
                     return true
                 } else {
                     return false 
                 }
             },
-            message: 'must be greater than today'
+            message: 'must be greater or equal than today'
         }
     },
     status: Boolean,

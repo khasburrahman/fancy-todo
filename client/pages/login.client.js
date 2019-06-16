@@ -31,8 +31,13 @@ function event_login() {
             let { access_token } = res.data
             window.localStorage.setItem(USER_EMAIL_LOCAL_STORAGE, email)
             window.localStorage.setItem(USER_TOKEN_LOCAL_STORAGE, access_token)
-            render([page_loading()])
-            let 
+            render('loading')
+            action_listTodo()
+                .then(res => {
+                    window.todoAppState.todos = res.data
+                    render('main')
+                    toast_success(`Login Success!`, 'Now you can manage your todo list!')
+                })
         })
         .catch(toast_error)
 }

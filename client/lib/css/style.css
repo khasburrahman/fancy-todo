@@ -12,6 +12,12 @@ body {
   background-color: #ffffff;
 }
 
+.form-todo {
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+}
+
 .loading {
   width: 100%;
   max-width: 430px;

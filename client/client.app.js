@@ -39,6 +39,25 @@ $(document).ready(function () {
     render('loading')
     if (getQueryParam('code')) {
         /** login degan github */
+        action_loginGithub(getQueryParam('code'))
+            .then(res => {
+                let { access_token, email } = res.data
+                window.localStorage.setItem(USER_EMAIL_LOCAL_STORAGE, email)
+                window.localStorage.setItem(USER_TOKEN_LOCAL_STORAGE, access_token)
+                render('loading')
+                action_listTodo()
+                    .then(res => {
+                        window.todoAppState.todos = res.data
+                        render('main')
+                        toast_success(`Login Success!`, 'Now you can manage your todo list!')
+                    })
+                    window.history.replaceState({}, 'Fancy Todo', '/')
+                })
+            .catch(err => {
+                window.history.replaceState({}, 'Fancy Todo', '/')
+                render('login')
+                toast_error(err)
+            })
     } else if (email && token) {
         action_listTodo()
             .then(res => {

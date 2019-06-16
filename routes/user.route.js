@@ -3,6 +3,6 @@ const userController = require('../controllers/user.controller')
 
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.post('/loginHithub', userController.loginGithub)
+router.post('/loginGithub', userController.loginGithub)
 
 module.exports = router

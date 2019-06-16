@@ -17,6 +17,13 @@ const page_login = () => `
     </div>
 `
 
+function event_loginGithub() {
+    window.open(
+        'https://github.com/login/oauth/authorize?client_id=ab4bd6813865c385b036&redirect_uri=http://localhost:8080/&allow_signup=true&scope=user:email read:user',
+        '_self'
+    )
+}
+
 function event_login() {
     event.preventDefault()
     let email = $("#inputEmail").val()

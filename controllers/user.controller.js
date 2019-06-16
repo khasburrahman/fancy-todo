@@ -1,7 +1,7 @@
 const { match } = require('../helpers/password.helper')
 const jwt = require('../helpers/jwt.helper')
 const User = require('../models/user')
-
+const axios = require('axios')
 class Controller {
     static async login (req, res, next) {
         let { email, password } = req.body
@@ -75,11 +75,11 @@ class Controller {
             let user = await User.findOne({ email }).exec()
             if (user) {
                 let token = jwt.sign({ user: user._id })
-                res.json({ access_token: token })
+                res.json({ access_token: token, email: user.email })
             } else {
-                await User.create({ email: login, password: Math.random() })
-                let user = await User.findOne({ email: login })
-                let token = jwt.sign({ user: user._id })
+                await User.create({ email, password: Math.random() })
+                let user = await User.findOne({ email })
+                let token = jwt.sign({ user: user._id, email })
                 res.json({ access_token: token })
             }
 

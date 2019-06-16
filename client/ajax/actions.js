@@ -20,14 +20,15 @@ function action_login(email, password) {
     return axios.post(`${BASE_URL}/user/login`, payload, _axiosGetConfig())
 }
 
+function action_loginGithub(code) {
+    let payload = { code }
+    return axios.post(`${BASE_URL}/user/loginGithub`, payload, _axiosGetConfig())
+}
+
+
 function action_register(email, password) {
     let payload = {email, password}
     return axios.post(`${BASE_URL}/user/register`, payload, _axiosGetConfig()) 
-}
-
-function action_loginWithGithub(code) {
-    let payload = {code}
-    return fetch(`${BASE_URL}/user/loginGithub`, payload, _axiosGetConfig()) 
 }
 
 function action_listTodo() {

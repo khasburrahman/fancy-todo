@@ -16,7 +16,7 @@ $(document).ready(function () {
     if (user) {
 
     } else {
-        let components = [component_login()]
+        let components = [component_loading()]
         render(components)
     }
     console.log("ready!");

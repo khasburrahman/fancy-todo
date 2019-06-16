@@ -5,11 +5,21 @@ function getQueryParam(key) {
     return query
 }
 
-function toast_error(msg) {
+function toast_error(err) {
+    let msg = err.response && err.response.data || 'unknown error: ' + err.message
     $.toast({
-        title: 'A error occured!',
+        title: 'An error occured!',
         content: msg,
         type: 'error',
+        delay: 2666
+    })
+}
+
+function toast_success(title='success', msg) {
+    $.toast({
+        title: title,
+        content: msg,
+        type: 'success',
         delay: 2666
     })
 }

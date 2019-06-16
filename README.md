@@ -1,6 +1,13 @@
 # fancy-todo
 @hemhem 2020
 
+### Fitur Tambahan
+- WYSIWYG editor buat detail todo
+
+### Alamat Aplikasi
+- client: `https://khasburrahman.github.io/fancy-todo/`
+- server: `https://hemhem-fancytodo.herokuapp.com/`
+
 ### Cara main
 - buat file `.env` dari template `.envTemplate`
 - jalankan server `npm run dev`

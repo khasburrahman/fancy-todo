@@ -41,3 +41,7 @@ function action_postTodo(payload) {
 function action_update(payload, id) {
     return axios.patch(`${BASE_URL}/todo/${id}`, payload, _axiosGetConfig())
 }
+
+function action_delete(id) {
+    return axios.delete(`${BASE_URL}/todo/${id}`, _axiosGetConfig())
+}

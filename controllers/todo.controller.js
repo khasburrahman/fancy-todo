@@ -1,4 +1,5 @@
 const Todo = require('../models/todo')
+const mongoose = require('mongoose')
 
 class TodoController { 
     static async create(req, res, next) {
@@ -19,8 +20,8 @@ class TodoController {
         try {
             let queryResult = await Todo.find({user}).exec()
             let todos = queryResult.map(val => {
-                let {name, textData, quillData, dueDate, status, htmlData} = val
-                return { name, textData, quillData, dueDate, status, htmlData }
+                let {name, textData, quillData, dueDate, status, htmlData, _id} = val
+                return { name, textData, quillData, dueDate, status, htmlData, _id }
             })
             res.json(todos)
         } catch(err) {
@@ -47,7 +48,9 @@ class TodoController {
     }
 
     static async update(req, res, next) {
-        let {id, textData, quillData, name, dueDate, status} = req.body
+        let id = req.params.id
+        let { textData, quillData, name, dueDate, status, htmlData} = req.body
+        console.log(req.body)
         let user = req.user
         try {
             let todo = await Todo.findOne({ _id: id, user }).exec()
@@ -56,11 +59,12 @@ class TodoController {
                 if (quillData) todo.quillData = quillData
                 if (name) todo.name = name
                 if (dueDate) todo.dueDate = dueDate
-                if (status) todo.status = status
+                if (status || status !== 'false') todo.status = status
+                if (htmlData) todo.htmlData = htmlData
                 await todo.save()
                 res.json({ name, textData, quillData, dueDate, status })
             } else {
-                next(err)
+                next({code: 400, msg: 'id not found'})
             }
         } catch (err) {
             console.log('todo detail error', err)

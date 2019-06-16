@@ -37,3 +37,7 @@ function action_listTodo() {
 function action_postTodo(payload) {
     return axios.post(`${BASE_URL}/todo`, payload, _axiosGetConfig())
 }
+
+function action_update(payload, id) {
+    return axios.patch(`${BASE_URL}/todo/${id}`, payload, _axiosGetConfig())
+}

@@ -51,10 +51,10 @@ $(document).ready(function () {
                         render('main')
                         toast_success(`Login Success!`, 'Now you can manage your todo list!')
                     })
-                    window.history.replaceState({}, 'Fancy Todo', '/')
+                window.history.replaceState({}, 'Fancy Todo', '/fancy-todo/')
                 })
             .catch(err => {
-                window.history.replaceState({}, 'Fancy Todo', '/')
+                window.history.replaceState({}, 'Fancy Todo', '/fancy-todo/')
                 render('login')
                 toast_error(err)
             })

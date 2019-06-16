@@ -11,13 +11,14 @@ const page_login = () => `
             <button onclick="event_register()" class="btn btn-sm btn-primary btn-block btn-primary2" type="submit">Register</button>
             <br>
             <h5 class="h5 mb-3 font-weight-normal">Or sign in with github</h5>
-            <button onclick="event_loginGithub()" class="btn btn-sm btn-primary btn-block btn-primary2" type="submit">Sign in with github</button>
+            <button onclick="event_loginGithub()" class="btn btn-sm btn-primary btn-block btn-primary2">Sign in with github</button>
             <p class="mt-5 mb-3 text-muted">&copy; hemhem 2020</p>
         </form>
     </div>
 `
 
 function event_loginGithub() {
+    event.preventDefault()
     window.open(
         'https://github.com/login/oauth/authorize?client_id=ab4bd6813865c385b036&redirect_uri=http://localhost:8080/&allow_signup=true&scope=user:email read:user',
         '_self'
